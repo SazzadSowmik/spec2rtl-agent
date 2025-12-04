@@ -54,3 +54,5 @@ Thumbs.db
 # Test coverage
 .coverage
 htmlcov/
+
+PLAN.txt
