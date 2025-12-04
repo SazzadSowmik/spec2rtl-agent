@@ -1,0 +1,28 @@
+services:
+  spec2rtl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spec2rtl-agent
+    env_file:
+      - .env
+    volumes:
+      # Mount source code for hot reload
+      - ./src:/app/src
+      - ./config:/app/config
+      - ./data:/app/data
+      - ./tests:/app/tests
+      - ./notebooks:/app/notebooks
+      # Mount main.py
+      - ./main.py:/app/main.py
+    ports:
+      - "8888:8888"  # Jupyter Lab (if needed)
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    networks:
+      - spec2rtl-network
+
+networks:
+  spec2rtl-network:
+    driver: bridge
