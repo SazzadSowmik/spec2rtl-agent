@@ -56,3 +56,5 @@ Thumbs.db
 htmlcov/
 
 PLAN.txt
+# Processed figures
+data/processed/

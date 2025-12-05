@@ -1,26 +1,29 @@
+"""
+Spec2RTL-Agent - Main Entry Point
+"""
+
 import asyncio
 from rich.console import Console
-from rich.panel import Panel
+from src.core.logging_config import setup_logging
 
 console = Console()
 
 
 async def main():
-    """Main entry point"""
+    """Run Understanding Agent test."""
+    # Setup logging
+    logger = setup_logging(log_dir="logs")
     
-    console.print(Panel.fit(
-        "[bold green]Hello World from Spec2RTL-Agent! 🚀[/bold green]\n\n"
-        "[cyan]AutoGen 0.4 Multi-Agent System for RTL Generation[/cyan]\n"
-        "[dim]Ready to transform specifications into hardware code[/dim]",
-        title="Spec2RTL-Agent",
-        border_style="green"
-    ))
+    console.print("\n[bold blue]🚀 Spec2RTL-Agent - Understanding Module Test[/bold blue]\n")
     
-    # Test async functionality
-    await asyncio.sleep(0.1)
+    # Import and run test
+    from src.agents.understanding.understanding_agent import test_understanding_agent
     
-    console.print("\n✅ [green]System initialized successfully![/green]")
-    console.print("📝 [yellow]Next: Implement Understanding Module[/yellow]\n")
+    await test_understanding_agent()
+    
+    console.print("\n[bold green]✅ Test complete![/bold green]")
+    console.print("\n[yellow]📁 Check logs/ directory for detailed logs[/yellow]")
+    console.print("[yellow]📁 Check data/output/summaries/ for saved summaries[/yellow]\n")
 
 
 if __name__ == "__main__":

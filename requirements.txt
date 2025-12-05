@@ -40,3 +40,6 @@ mypy>=1.13.0          # Type checking
 
 # Jupyter (optional, for notebooks)
 jupyterlab>=4.2
+
+pdf2image>=1.16.0
+Pillow>=10.0.0

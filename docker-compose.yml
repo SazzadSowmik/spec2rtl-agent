@@ -12,6 +12,7 @@ services:
       - ./config:/app/config
       - ./data:/app/data
       - ./tests:/app/tests
+      - ./logs:/app/logs
       - ./notebooks:/app/notebooks
       # Mount main.py
       - ./main.py:/app/main.py
