@@ -265,7 +265,7 @@ Provide a clear, technical summary focusing on:
         summaries = []
         
         # Sections to log full prompts for
-        important_sections = ["5.1.1", "5.1.2", "5.1.4", "5.2"]
+        # important_sections = ["5.1.1", "5.1.2", "5.1.4", "5.2"]
         
         for i, section in enumerate(sections, 1):
             section_id = section.get("section_id", f"section_{i}")
@@ -311,24 +311,14 @@ Provide a clear, technical summary focusing on:
         from pathlib import Path
         import json
         from datetime import datetime
-        
+
         output_dir = Path("data/output/summaries")
         output_dir.mkdir(parents=True, exist_ok=True)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_file = output_dir / f"summaries_{timestamp}.json"
         
-        summaries_data = []
-        for s in summaries:
-            summaries_data.append({
-                "section_id": s["section_id"],
-                "title": s["title"],
-                "summary": s["summary"],
-                "content_length": len(s.get("original_content", "")),
-                "usage": s.get("usage", {}),
-                "figures_referenced": s.get("figures_referenced", [])
-            })
-        
+        # Add metadata
         output_data = {
             "metadata": {
                 "timestamp": timestamp,
@@ -338,7 +328,18 @@ Provide a clear, technical summary focusing on:
                 "estimated_cost": self.total_cost,
                 "figures_available": len(self.available_figures)
             },
-            "summaries": summaries_data
+            "summaries": [
+                {
+                    "section_id": s["section_id"],
+                    "title": s["title"],
+                    "summary": s["summary"],
+                    "original_content": s.get("original_content", ""),  # ← ADD THIS LINE
+                    "content_length": len(s.get("original_content", "")),
+                    "usage": s["usage"],
+                    "figures_referenced": s["figures_referenced"]
+                }
+                for s in summaries
+            ]
         }
         
         with open(output_file, 'w', encoding='utf-8') as f:
