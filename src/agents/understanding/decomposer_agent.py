@@ -26,10 +26,10 @@ class DecomposerAgent:
     
     SYSTEM_PROMPT = """You are an expert hardware design architect specializing in RTL implementation.
 
-Your task: Decompose a high-level hardware function into implementable sub-functions.
+Your task: Decompose a high-level hardware function into implementable sub-functions to implement System Verilog Code.
 
 For each decomposition, you must:
-1. Identify all sub-functions needed to implement the target
+1. Identify all sub-functions/sub-module needed to implement the target/top-module
 2. Determine the correct implementation order
 3. Specify dependencies between sub-functions
 4. Provide a brief description of each sub-function's purpose
@@ -217,6 +217,12 @@ Each sub-function should:
 - Map to a specific section in the spec
 - Have defined dependencies
 - Be implementable as a standalone module
+- For each sub-module provide proper interfaces (inputs/outputs) with name and width
+- Add key requirements from the specification to each sub-function
+- Decompose as smaller components as possible, while ensuring each is implementable in a System Verilog module
+- It must follows the standard modular design used in most academic and industry-standard processor architectures (such as those described in Patterson and Hennessy's textbooks)
+- Use your own knowledge of hardware design best practices to guide the decomposition
+- Use nested sub-functions where appropriate to encapsulate related functionality
 
 Return ONLY a JSON object (no markdown, no explanation) with this structure:
 {{
@@ -367,7 +373,7 @@ async def test_decomposer_agent():
         # 3. Create agent
         print("\n🤖 Creating Decomposer Agent...", flush=True)
         provider = OpenAIProvider(
-            model_name="gpt-4o-mini",
+            model_name="gpt-5.2",  # Supports vision
             temperature=0.3
         )
         
@@ -376,14 +382,14 @@ async def test_decomposer_agent():
         print("   ✓ Agent created", flush=True)
         
         # 4. Test decomposition of AES Cipher (Section 5.1)
-        print("\n🔨 Decomposing: AES Cipher (Section 5.1)", flush=True)
+        print("\n🔨 Decomposing: RISC V 32I (Section 2)", flush=True)
         print("   This may take 10-30 seconds...", flush=True)
         
         decomposition = await agent.decompose_function(
-            target_function="AES Cipher",
+            target_function="RISC V 32I",
             summaries=summaries,
             original_sections=original_sections,
-            target_section_id="5.1",
+            target_section_id="2",
             log_prompt=True
         )
         
@@ -401,7 +407,7 @@ async def test_decomposer_agent():
                 print(f"   Spec: {sf.get('spec_reference', 'N/A')}", flush=True)
             
             # Save
-            output_file = agent._save_decomposition(decomposition, "AES_Cipher")
+            output_file = agent._save_decomposition(decomposition, "RISC_V_32I")
             print(f"\n💾 Saved to: {output_file}", flush=True)
             
             # Show usage

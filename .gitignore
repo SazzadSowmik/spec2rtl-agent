@@ -58,3 +58,8 @@ htmlcov/
 PLAN.txt
 # Processed figures
 data/processed/
+
+# backup files
+backup/*
+# React Component Preview
+previewConfig.json

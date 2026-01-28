@@ -305,7 +305,7 @@ async def test_verifier_agent():
         # 2. Create agent
         print("\n🤖 Creating Verifier Agent...", flush=True)
         provider = OpenAIProvider(
-            model_name="gpt-4o-mini",
+            model_name="gpt-5.2",
             temperature=0.3
         )
         

@@ -246,7 +246,7 @@ if __name__ == "__main__":
     print("\n🔍 Testing Figure Extraction\n")
     
     # Extract all figures with images
-    result = extract_all_figures("data/input/specs/AES_Spec.pdf", extract_images=True)
+    result = extract_all_figures("data/input/specs/riscv-spec-20191213.pdf", extract_images=True)
     
     print(f"\n✅ Found {len(result['figures'])} figures")
     print(f"✅ Saved {len(result['images'])} images\n")

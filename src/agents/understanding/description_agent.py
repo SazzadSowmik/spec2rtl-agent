@@ -393,7 +393,7 @@ async def test_description_agent():
         # 4. Create agent
         print("\n🤖 Creating Description Agent...", flush=True)
         provider = OpenAIProvider(
-            model_name="gpt-4o-mini",
+            model_name="gpt-5.2",
             temperature=0.3
         )
         

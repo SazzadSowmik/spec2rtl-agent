@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tailwind (so your bg-slate-900 etc works) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React 18 UMD -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel (so JSX can run in browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body class="bg-slate-900">
+    <div id="root"></div>
+
+    <!-- IMPORTANT: type must be text/babel -->
+    <script type="text/babel" data-presets="react" src="./demo.jsx"></script>
+  </body>
+</html>

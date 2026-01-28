@@ -371,7 +371,7 @@ async def test_understanding_agent():
     logger.info("="*70)
     
     # Load PDF
-    pdf_path = "data/input/specs/AES_Spec.pdf"
+    pdf_path = "data/input/specs/riscv-spec-20191213.pdf"
     print(f"📄 Loading: {pdf_path}")
     
     spec_doc = load_specification(pdf_path)
@@ -381,7 +381,7 @@ async def test_understanding_agent():
     
     # Create provider and agent
     provider = OpenAIProvider(
-        model_name="gpt-4o-mini",  # Supports vision
+        model_name="gpt-5.2",  # Supports vision
         temperature=0.3
     )
     
